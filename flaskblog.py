@@ -1,19 +1,12 @@
-from flask import Flask,redirect,url_for
+from flask import Flask,redirect,url_for,render_template
 
 app=Flask(__name__) #variable, module
 
 
-@app.route("/") # goto diff pages- route decorators "/" represents root page
-def home():
-    return "Hello world <h1> FLASK</h>"
+@app.route("/<name>") # goto diff pages- route decorators "/" represents root page
+def home(name):
+    return render_template("index.html",content=name)
 
-@app.route("/<name>")
-def user(name):
-    return f"Hello {name}!"
-
-@app.route("/admin")
-def admin():
-    return redirect(url_for("user",name="Anushree"))
 
 if __name__=="__main__":
     app.run()
