@@ -1,7 +1,8 @@
 from flask import Flask,redirect,url_for,render_template,request,session
-
+from datetime import timedelta
 app=Flask(__name__) #variable, module
 app.secret_key="practice"
+app.permanent_session_lifetime=timedelta(minutes=1)
 
 
 @app.route("/") # goto diff pages- route decorators "/" represents root page
@@ -15,6 +16,7 @@ def test_inherit():
 @app.route("/login",methods=["POST","GET"])
 def login():
     if request.method=="POST":
+        session.permanent=True
         user=request.form['nm']
         session['user']=user
         return redirect(url_for("user"))
