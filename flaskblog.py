@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request,session
+from flask import Flask,redirect,url_for,render_template,request,session,flash
 from datetime import timedelta
 app=Flask(__name__) #variable, module
 app.secret_key="practice"
@@ -36,6 +36,7 @@ def user():
 @app.route("/logout") #remove data after useer session
 def logout():
     session.pop("user",None)
+    flash("you logged out","info")
     return redirect(url_for("login"))
 
 if __name__=="__main__":
